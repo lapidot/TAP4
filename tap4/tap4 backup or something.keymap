@@ -1,0 +1,347 @@
+/*
+ * Copyright (c) 2021 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/ext_power.h>
+#include <dt-bindings/zmk/outputs.h>
+//#include <dt-bindings/zmk/mouse.h> //&mkp LCLK
+//#include <dt-bindings/zmk/rgb.h>
+
+#define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
+
+#define BASE    0
+#define ONEHAND 1
+#define MIRRZ   2
+#define MIRRB   3
+#define ARROWS  4
+#define XARROWS 5
+#define NUMPAD  6
+#define XNUMPAD 7
+#define FUNC    8
+#define XFUNC   9
+#define EXTRABT 10
+#define HELPER  11
+
+/ {
+
+    // &led_strip {
+    //     chain-length = <1>;
+    // };
+    combos {
+        compatible = "zmk,combos";
+
+        DFBS {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <12 13>;
+            layers = <BASE NUMPAD XNUMPAD ONEHAND>;
+        };
+
+        MMEnter {
+            bindings = <&kp ENTER>;
+            key-positions = <26 27>;
+            layers = <BASE NUMPAD XNUMPAD ONEHAND>;
+        };
+        JKBS {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <16 17>;
+            layers = <BASE NUMPAD XNUMPAD ONEHAND>;
+        };
+        CVEnter {
+            bindings = <&kp ENTER>;
+            key-positions = <22 23>;
+            layers = <BASE NUMPAD XNUMPAD ONEHAND>;
+        };
+        doRTL {
+            bindings = <&kp RS(RCTRL)>;
+            key-positions = <18 19>;
+            layers = <BASE NUMPAD XNUMPAD ONEHAND>;
+        };
+        doLTR {
+            bindings = <&kp LS(LCTRL)>;
+            key-positions = <10 11>;
+            layers = <NUMPAD XNUMPAD ONEHAND>;
+        };
+        doChngLang {
+            bindings = <&kp LS(LALT)>;
+            key-positions = <10 12>;
+            layers = <NUMPAD XNUMPAD ONEHAND>;
+        };
+    };
+    behaviors {
+        gqt: global-quick-tap {
+             compatible = "zmk,behavior-hold-tap";
+             label = "GLOBAL_QUICK_TAP";
+             #binding-cells = <2>;
+             flavor = "tap-preferred";
+             tapping-term-ms = <180>;
+             quick-tap-ms = <125>;
+             global-quick-tap;
+             bindings = <&kp>, <&kp>;
+        };   
+        ht: hold_tap {
+            label = "hold_tap";
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <180>;
+            quick-tap-ms = <150>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+        };
+        td: tapdance {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TAPDANCE";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            quick_tap_ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+            };
+        td0: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_NumberOfTaps";
+            #binding-cells = <0>;
+            tapping-term-ms = <180>;
+            bindings = <&kp N1>, <&kp N2>, <&kp N3>;
+        };
+
+        // td_SHSSOLDWITHSHIFT: tap_dance_sftQuotes {
+        //     compatible = "zmk,behavior-tap-dance";
+        //     label = "TAP_SHFT_QUOTE";
+        //     #binding-cells = <0>;
+        //     tapping-term-ms = <180>;
+        //     bindings =
+        //     <&gqt RSHFT SINGLE_QUOTE>,
+        //     <&kp SEMI>;
+        // };
+
+        td_SHSS: tap_dance_sftQuotes {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_SHFT_QUOTE";
+            #binding-cells = <0>;
+            tapping-term-ms = <210>;
+            bindings =
+            <&kp SINGLE_QUOTE>,
+            <&kp SEMI>;
+        };
+
+        td_SLASHES: tap_dance_slashes {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_SLASHES";
+            #binding-cells = <0>;
+            tapping-term-ms = <210>;
+            bindings =
+            <&kp SLASH>,
+            <&kp BACKSLASH>;
+        };
+        // &mo_tog 2 1     // &mo 2 on hold, &tog 1 on tap
+        // MO_TOG(3)       // &mo 3 on hold, &tog 3 on tap
+        mo_tog: behavior_mo_tog {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOD_TOGGLE";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <180>;
+            bindings = <&mo>, <&tog>;
+        };
+        // hw_soft_off: hw_soft_off {
+        //     compatible = "zmk,behavior-soft-off";
+        //     #binding-cells = <0>;
+        //     hold-time-ms = <5000>;
+        // };
+    };
+    macros {
+        alt_f4: alt_f4 {
+            compatible = "zmk,behavior-macro";
+            label = "ALT_F4_MACRO";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <40>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp F4>
+                , <&macro_release &kp LALT>;
+        };
+        alt_shft: alt_shft {
+            compatible = "zmk,behavior-macro";
+            label = "ALT_SHFT_MACRO";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <40>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp LSHIFT>
+                , <&macro_release &kp LALT>;
+        };
+        rctrl_shft: rctrl_shft {
+            compatible = "zmk,behavior-macro";
+            label = "RCTRL_SHFT_MACRO";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <40>;
+            bindings
+                = <&macro_press &kp RCTRL>
+                , <&macro_tap &kp RSHIFT>
+                , <&macro_release &kp RCTRL>;
+        };
+        lctrl_shft: lctrl_shft {
+            compatible = "zmk,behavior-macro";
+            label = "LCTRL_SHFT_MACRO";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <40>;
+            bindings
+                = <&macro_press &kp RCTRL>
+                , <&macro_tap &kp RSHIFT>
+                , <&macro_release &kp RCTRL>;
+        };
+    };
+
+    // &soft_off {
+    //     hold-time-ms = <5000>; // Only turn off it the key is held for 5 seconds or longer.
+    // };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&kp Q           &kp W       &kp E       &kp R           &kp T       &kp Y   &kp U       &kp I       &kp O       &kp P
+&gqt LSHFT A    &gqt LCTL S &gqt LALT D &lt NUMPAD F    &gqt LGUI G &kp H   &gqt LGUI J &gqt RALT K &gqt RCTL L &td_SHSS
+&lt MIRRZ Z     &kp X       &kp C       &kp V           &lt MIRRB B &kp N   &kp M       &kp COMMA   &kp DOT     &td_SLASHES
+        &lt NUMPAD TAB  &gqt LCTL SPACE  &gqt LGUI RET  &gqt LGUI BACKSPACE  &gqt RSFT SPACE  &mo ARROWS
+        &mo XNUMPAD     &mo NUMPAD
+        &mo XARROWS  &mo XFUNC     &mo FUNC     &mo NUMPAD
+            >;
+        };
+        
+        onehanded_base_layer {
+            bindings = <
+&kp Q           &kp W       &kp E       &kp R           &kp T       &kp Y   &kp U       &kp I       &kp O       &kp P
+&gqt LSHFT A    &gqt LCTL S &gqt LALT D &lt HELPER F    &gqt LGUI G &kp H   &gqt LGUI J &gqt RALT K &gqt RCTL L &td_SHSS
+&lt MIRRZ Z     &kp X       &kp C       &kp V           &lt MIRRB B &kp N   &kp M       &kp COMMA   &kp DOT     &td_SLASHES
+        &lt XARROWS TAB  &lt MIRRZ SPACE  &gqt LCTL RET  &gqt LSFT BACKSPACE  &lt MIRRZ SPACE  &mo ARROWS
+        &mo XNUMPAD     &mo NUMPAD
+        MO_TOG(XARROWS)  &sk LSHIFT     &mo FUNC     MO_TOG(NUMPAD)
+            >;
+        };
+
+        mirror_layer {
+            bindings = <
+&kp P           &kp O       &kp I       &kp U       &kp Y   &kp T   &kp R   &kp E &kp W   &kp Q
+&td_SHSS &gqt LCTL L &gqt RALT K &gqt LGUI J &kp H   &kp G   &kp F   &kp D &kp S   &kp A
+&kp FSLH        &kp DOT     &kp COMMA   &kp M       &kp N   &kp B   &kp V   &kp C &kp X   &kp Z
+                            &mo XNUMPAD  &gqt LSHFT DEL     &trans  &trans     &trans     &trans
+                            &trans  &trans
+                            &out OUT_TOG  &trans     &trans     &trans
+            >;
+        };
+
+        mirrB_layer {
+            bindings = <
+&kp P           &kp O       &kp I       &kp U       &kp Y   &kp EQUAL  &kp AMPS     &kp ASTRK    &kp LPAR  &kp RPAR
+&gqt RSHFT SEMI &gqt LCTL L &gqt RALT K &gqt LGUI J &kp H   &kp SLASH  &kp DOLLAR   &kp PERCENT  &kp CARET  &kp PLUS
+&kp FSLH        &kp DOT     &kp COMMA   &kp M       &kp N   &kp NUM_0  &kp EXCL     &kp AT_SIGN  &kp HASH  &kp MINUS
+                         &mo XARROWS  &gqt LSHFT DEL     &trans  &trans     &trans     &trans
+                            &trans  &trans
+                            &out OUT_BLE  &trans     &trans     &trans
+            >;
+        };
+
+        ARROWS_layer {
+            bindings = <
+&kp F1         &kp F2       &kp F3      &kp F4      &kp F5   &kp MINUS  &kp HOME  &kp UP    &kp PAGE_UP    &kp BKSP
+&mt LSHFT F6   &mt LCTL F7  &mt RALT F8 &mt LGUI F9 &kp F10  &kp NUM_0  &kp LEFT  &kp DOWN  &kp RIGHT      &kp LSHFT
+&kp F11        &kp F12      &kp F13     &trans      &trans   &mo FUNC   &kp END   &kp DOWN  &kp PAGE_DOWN  &mo NUMPAD
+                  &mo FUNC  &trans  &trans   &trans     &trans    &trans
+                            &trans  &trans
+                            &trans  &trans     &trans     &trans
+            >;
+        };
+
+        XARROWS_layer {
+            bindings = <
+&kp MINUS  &kp HOME  &kp UP    &kp PAGE_UP    &kp ESC  &kp MINUS  &kp HOME  &kp UP    &kp PAGE_UP    &kp BKSP
+&kp LSHFT  &mt LCTL LEFT  &kp LEFT  &kp RIGHT      &kp DOT   &kp NUM_0  &kp LEFT  &kp DOWN  &kp RIGHT      &kp DOT
+&kp PLUS   &kp END   &kp DOWN  &kp PAGE_DOWN  &kp CMMA  &kp PLUS   &kp END   &kp DOWN  &kp PAGE_DOWN  &kp CMMA
+                     &mo XFUNC    &trans         &trans    &trans     &trans    &trans
+                            &mo XFUNC  &trans
+                            &trans  &trans     &trans     &trans
+            >;
+        };
+        
+        NUMPAD_layer {
+            bindings = <
+&kp C_VOL_UP  &kp INSERT &kp PIPE    &kp TILDE   &kp ESC          &kp EQUAL  &kp NUM_7   &kp NUM_8  &kp NUM_9  &kp NUM_0
+&kp C_VOL_DN  &kp LBRC   &kp LBKT    &kp LPAR    &alt_shft        &kp SLASH  &kp NUM_4   &kp NUM_5  &kp NUM_6  &kp PLUS
+&kp C_MUTE    &kp RBRC   &kp RBKT    &kp RPAR    &kp PRINTSCREEN  &kp NUM_0  &kp NUM_1   &kp NUM_2  &kp NUM_3  &kp MINUS
+                                &mo XARROWS  &gqt LCTL DEL &trans           &trans     &kp KP_DOT  &mo FUNC
+                            &trans  &trans
+                            &mo XARROWS  &trans     &trans     &trans
+            >;
+        };
+
+        XNUMPAD_layer {
+            bindings = <
+&kp EQUAL  &kp NUM_7  &kp NUM_8  &kp NUM_9   &kp NUM_0  &out OUT_BLE  &out OUT_USB  &out OUT_TOG  &kp NUM_9  &kp NUM_0
+&kp SLASH  &kp NUM_4  &kp NUM_5  &kp NUM_6   &kp PLUS   &kp SLASH  &bt BT_SEL 4  &bt BT_SEL 5  &kp NUM_6  &kp PLUS
+&kp NUM_0  &kp NUM_1  &kp NUM_2  &kp NUM_3   &kp MINUS  &kp NUM_0   &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &kp MINUS
+                      &mo XFUNC     &kp KP_DOT  &trans     &trans     &trans     &trans
+                            &mo XFUNC  &trans
+                            &trans  &trans     &trans     &trans
+            >;
+        };
+// &rgb_ug RGB_TOG       &kp C_PREV  &kp C_PLAY_PAUSE  &kp C_NEXT    &bt BT_SEL 1     &kp F6     &kp F4  &kp F5  &kp F6  &kp F11
+        FUNC_layer {
+            bindings = <
+&to BASE     &none      &kp C_BRI_UP      &bootloader   &bt BT_SEL 0     &alt_f4    &kp F7  &kp F8  &kp F9  &kp F10
+&kp C_VOL_DN       &kp C_PREV  &kp C_PLAY_PAUSE  &kp C_NEXT    &bt BT_SEL 1     &kp F6     &kp F4  &kp F5  &kp F6  &kp F11
+&kp CAPS    &bt BT_CLR  &kp C_BRI_DN      &none         &bt BT_SEL 2     &kp PLUS   &kp F1  &kp F2  &kp F3  &kp F12
+                      &trans            &bt BT_CLR       &trans     &trans    &trans  &none 
+                            &trans  &trans
+                            &trans  &trans     &trans     &trans
+            >;
+        };
+        XFUNC_layer {
+            bindings = <
+&alt_f4     &kp F7  &kp F8  &kp F9  &kp F10     &to BASE &none       &kp C_BRI_UP      &bootloader   &bt BT_SEL 0
+&kp RSHFT   &kp F4  &kp F5  &kp F6  &kp F11     &none    &kp C_PREV  &kp C_PLAY_PAUSE  &kp C_NEXT    &bt BT_SEL 1
+&bootloader &kp F1  &kp F2  &kp F3  &kp F12     &kp CAPS &bt BT_CLR  &kp C_BRI_DN      &none         &bt BT_SEL 2
+                      &bt BT_CLR_ALL            &bt BT_CLR       &trans     &trans    &trans  &none 
+                            &trans  &trans
+                            &trans  &trans     &to ONEHAND     &to BASE
+            >;
+        };
+
+
+
+
+        HELPER_layer {
+            bindings = <
+&kp LS(Q)   &kp O       &kp I       &kp U       &kp Y   &kp T   &kp R   &kp E &kp W   &kp Q
+&kp LS(A)   &gqt LCTL L &gqt RALT K &gqt LGUI J &kp H   &kp G   &kp F   &kp D &kp S   &kp A
+&kp LS(Z)   &kp DOT     &kp COMMA   &kp M       &kp N   &kp B   &kp V   &kp C &kp X   &kp Z
+                            &mo XNUMPAD  &gqt LSHFT DEL     &trans  &trans     &trans     &trans
+                            &trans  &trans
+                            &out OUT_TOG  &trans     &trans     &trans
+            >;
+        };
+//&to EXTRABT//&mo EXTRABT //&hw_soft_off
+        // EXTRABT_layer {
+        //     bindings = <
+
+// &kp K_PWR   &none       &ext_power EP_ON    &none       &none   &kp T   &kp R   &kp E &kp W   &kp Q
+// &none       &kp K_SLEEP &ext_power EP_TOG   &bt BT_CLR  &none   &kp G   &kp F   &kp D &kp S   &kp A
+// &to BASE    &none       &ext_power EP_OFF   &none       &none   &kp B   &kp V   &kp C &kp X   &kp Z
+//                     &to BASE     &kp N1    &kp N2    &kp N3     &kp N4     &to BASE
+//                             &trans  &trans
+//                             &trans  &trans     &trans     &trans
+//            >;
+//        };
+    };
+};

@@ -1,0 +1,9 @@
+file_format: "1"
+id: tap4
+name: TAP4
+type: shield
+url: https://github.com/lapidot/tap4
+requires: [pro_micro]
+features:
+  - keys
+  - underglow
