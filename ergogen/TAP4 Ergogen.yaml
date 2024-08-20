@@ -1,0 +1,2666 @@
+meta:
+  engine: 4.0.0
+  autor: 4itor
+  version: 0.0.2
+
+units:
+  # Main layout
+  angle: -10
+  Distance: 250 #255 #260 #230
+  Fillet: 2
+  # constants
+  S: .525U # Default Spacer
+  WS: .70U # Wide Spacer (1.25S)
+  TOP: .3U # Top Spacer
+  MX: 14 # Size of the MX plate socket
+  SCREWRADIUS: 3 #3
+  LEDsize: 5 #4
+
+pins:
+  colPinPinky: P15 #P16 #P1
+  #colPinPinkyy:
+  #colPinPinkyyMirror:
+  define: colPinRing P14
+  colPinMiddle: P15
+  colPinIndex: P18
+  colPinInner: P19
+  colPinThumb1: P20 #Home
+  colPinThumb2: P21 #Reachy
+
+
+  #colPinMiddleMirror: P19
+  #colPinIndexMirror: P18
+  #colPinInnerMirror: P15
+  rowPinTop: P7
+  rowPinHome: P8
+  rowPinBottom: P9
+  rowPinTopMirror: P0
+  rowPinHomeMirror: P4
+  rowPinBottomMirror: P6
+
+  buzzerPinL: P5 #c6
+  buzzerPinR: P10 #B6
+  backlightPin: P1
+  i2cPin1: P2
+  i2cPin2: P3 
+
+points:
+  zones:
+    matrix:
+      #-- Displacement for KiCad Exports
+      anchor:
+        shift: [125, -125]
+      columns: 
+        pinky: 
+        #pinkyy: 
+        #pinkyyy:
+          key:
+            splay: 0
+            col_net: ColPinky #P16 #colPinPinky
+            #mirror.col_net: colPinPinkyMirror
+        ring:
+          key:
+            stagger: 8
+            splay: -6
+            spread: 20
+            col_net: ColRing #P14 #colPinRing
+            #mirror.col_net: colPinRingMirror
+        middle:
+          key:
+            splay: -5
+            spread: 20
+            stagger: 4
+            col_net: ColMiddle #P15 #colPinMiddle
+            #mirror.col_net: colPinMiddleMirror
+        index:
+          key:
+            splay: -5
+            stagger: -4
+            col_net: ColIndex #P18 #colPinIndex
+            #mirror.col_net: colPinIndexMirror
+        inner:
+          key:
+            stagger: -4
+            col_net: ColInner #P19 #colPinInner
+            #mirror.col_net: colPinInnerMirror
+      rows:
+        bottom:
+          row_net: RowLBottom #P9 #rowPinBottom
+          mirror.row_net: RowRBottom #P6 #rowPinBottomMirror
+        home:
+          row_net: RowLHome #P8 #rowPinHome
+          mirror.row_net: RowRHome #P4 #rowPinHomeMirror
+        #topp:
+        top:
+          row_net: RowLTop #P7 #rowPinTop
+          mirror.row_net: RowRTop #P0 #rowPinTopMirror
+        
+    thumb:
+      anchor:
+        ref: matrix_inner_bottom
+        shift: [-25, -20]
+        rotate: -5
+      columns:
+        tuckyy:
+          key:
+            #spread: 19
+            splay: 0
+            row_net: RowLBottom #P9 #rowPinBottom
+            col_net: ColThumbTucky #P20 #colPinThumb1
+            mirror.row_net: RowRBottom #P6 #rowPinBottomMirror
+            rotate: 0 # Inverted switch
+        tucky:
+          key:
+            #spread: 19
+            splay: 0
+            origin: [-9, -9.5]
+            row_net: RowLBottom #P9 #rowPinBottom
+            col_net: ColThumbReachy #P21 #colPinThumb2
+            mirror.row_net: RowRBottom #P6 #rowPinBottomMirror
+            rotate: 0 # Inverted switch
+        thomr:
+          key:
+            #size: [cx, 1.0cx]
+            height: 1.0cx
+            # spread: 19
+            splay: -20
+            origin: [-9, -9.5]
+            #row_net: P10 #rowPinHome
+            #col_net: P21 #colPinThumb1
+            #mirror.row_net: P18 #rowPinHomeMirror
+            #rotate: 180 # Inverted switch
+            col_net: ColThumbTucky  #P20 #colPinThumb1
+          rows:
+            bob:
+              #row_net: rowPinThumbTop
+              #bind: [60, 1, 0, 10]
+              #origin: [4.5, -17]
+              row_net: RowLHome #P8 #rowPinHome
+              #col_net: P20 #colPinThumb1
+              mirror.row_net: RowRHome #P4 #rowPinHomeMirror
+            tob:
+              #shift: [-0.125cx,-2cx-2]
+              shift: [0.125cx,0]
+              #row_net: rowPinThumb
+              #bind: [60, 1, 0, 10]
+              row_net: RowLTop #P7 #rowPinTop
+              #col_net: ColThumbTucky  #P20 #colPinThumb1
+              mirror.row_net: RowRTop #P0
+        reachy:
+          key:
+            size: [cx, 1.0cx]
+            height: 1.0cx
+            spread: 19
+            splay: -20
+            origin: [-9, -8.5]
+            col_net: ColThumbReachy #P21 #colPinInner
+            mirror.col_net: ColThumbReachy
+            #rotate: 180 # Inverted switch
+          rows:
+            bob:
+              #shift: [21,11]
+              #row_net: rowPinThumbTop
+              #bind: [60, 1, 0, 10]
+              #origin: [-9.5, -26.5]
+              row_net: RowLHome #P8 #rowPinHome
+              #col_net: colPinThumb2
+              mirror.row_net: RowRHome #P4 #rowPinHomeMirror
+            tob:
+              #shift: [0,-2cx]
+              #shift: [-0.125cx,0]
+              #row_net: rowPinThumb
+              #bind: [60, 1, 0, 10]
+              row_net: RowLTop #P7 #rowPinTop
+              #col_net: colPinThumb2
+              mirror.row_net: RowRTop #P0
+  rotate: angle
+  mirror: &mirror
+    ref: matrix_pinky_home
+    distance: Distance
+outlines:
+  keys:
+    - what: rectangle
+      where: -/thumb/
+      bound: false
+      size: [cx, cx]
+    - what: rectangle
+      where: /thumb/
+      bound: false
+      size: [cx, 1.0cx]
+
+  switch:
+    - what: rectangle
+      where: true
+      bound: false
+      size: [MX, MX]
+  mcu_slot:
+    - what: rectangle
+      size: [20, 40]
+      corner: 1
+      where:
+          aggregate.parts:
+            - ref: matrix_index_top
+          shift: [11, 26]
+          rotate: 90
+    - what: rectangle
+      operation: add
+      size: [18, 40]
+      corner: 1
+      where:
+          aggregate.parts:
+            - ref: matrix_index_top
+          shift: [-22, 28]
+          rotate: 90
+  mcu_slot_reducefromboard:
+    - what: rectangle
+      size: [33, 45]
+      corner: 1
+      where:
+          aggregate.parts:
+            - ref: matrix_index_top
+          shift: [-29, 34]
+          rotate: 90
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_pinky_top
+          shift: [-2S, +9]
+        - ref: matrix_pinky_bottom
+          shift: [-S-5, -2S]
+        - ref: matrix_pinky_bottom
+          shift: [15, -7S-5]
+        - ref: thumb_reachy_bob
+          shift: [S+5, -S]
+        - ref: thumb_reachy_bob
+          shift: [S+5, 3.2S]
+        - ref: mirror_thumb_reachy_bob
+          shift: [S+5, 3.2S]
+        - ref: mirror_thumb_reachy_bob
+          shift: [S+5, -S]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [15, -7S-5]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [-S-5, -2S]
+        - ref: mirror_matrix_pinky_top
+          shift: [-2S, +9]
+        - ref: mirror_matrix_ring_top
+          shift: [-2S, S+5]
+        - aggregate.parts:
+          - ref: matrix_pinky_top
+          - ref: mirror_matrix_pinky_top
+          shift: [0,27]
+       # - ref: mirror_matrix_ring_top
+       #   shift: [-2S, 1S+5]
+        #- ref: matrix_index_top
+        #  shift: [-0S, 40+5]
+       # - ref: matrix_index_top
+       #   shift: [-0S, 40]
+       # - ref: matrix_index_top
+       #   shift: [-0S, 25+5]
+       # - ref: matrix_pinky_top
+       # - ref: mirror_matrix_pinky_top
+       #   shift: [20, +20]
+        #- ref: matrix_ring_top
+        #  shift: [2S, 25+5]
+
+        - ref: matrix_ring_top
+          shift: [-2S, S+5]
+        # lower dent
+        # upper dent (averagind both top corners)
+      #fillet: Fillet
+
+
+  boardfiletted:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_pinky_top
+          shift: [-2S, +9]
+        - ref: matrix_pinky_bottom
+          shift: [-S-5, -2S]
+        - ref: matrix_pinky_bottom
+          shift: [15, -7S-5]
+        - ref: thumb_reachy_bob
+          shift: [S+5, -S]
+        - ref: thumb_reachy_bob
+          shift: [S+5, 3.2S]
+        - ref: mirror_thumb_reachy_bob
+          shift: [S+5, 3.2S]
+        - ref: mirror_thumb_reachy_bob
+          shift: [S+5, -S]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [15, -7S-5]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [-S-5, -2S]
+        - ref: mirror_matrix_pinky_top
+          shift: [-2S, +9]
+        - ref: mirror_matrix_ring_top
+          shift: [-2S, S+5]
+        - aggregate.parts:
+          - ref: matrix_pinky_top
+          - ref: mirror_matrix_pinky_top
+          shift: [0,27]
+        - ref: matrix_ring_top
+          shift: [-2S, S+5]
+      fillet: Fillet
+      
+  diode_slots:
+    - what: rectangle
+      size: [12,5]
+      where: -/thumb/
+      adjust:
+        shift: [-0, -9.5]
+        # shift: [9, -3]
+        # rotate: -90
+    - what: rectangle
+      size: [12,5]
+      where: [/thumb_tucky/,/thumb_tuckyy/ ,/mirror_thumb_tucky/,/mirror_thumb_tuckyy/ , /thumb_reachy_bob/,/mirror_thumb_reachy_bob/,/thumb_thomr_bob/,/mirror_thumb_thomr_bob/]
+      adjust:
+        shift: [-9, 4.5]
+        rotate: -90
+        # shift: [0, +8.5]
+        # rotate: 0 #-90
+    - what: rectangle
+      size: [12,5]
+      where: [/thumb_reachy_tob/,/mirror_thumb_reachy_tob/,/thumb_thomr_tob/,/mirror_thumb_thomr_tob/]
+      adjust:
+        shift: [0, +9]
+        rotate: 0
+        # shift: [0, +8.5]
+        # rotate: 0 #-90
+
+
+  buzzers:
+    - what: rectangle
+      size: [9.7,9.7]
+      where:
+          aggregate.parts:
+            - ref: thumb_tuckyy
+          shift: [-S-11, -5]
+          #aggregate.parts:
+          #  - ref: matrix_ring_bottom
+          #shift: [1, -S-8]
+    - what: rectangle
+      size: [9.7,9.7]
+      where:
+          aggregate.parts:
+            - ref: mirror_thumb_tuckyy
+          shift: [S+11, -5]
+
+  screwholes:
+    #top middle ##new
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [0, 45]
+    #bottom middle ##edited
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+          aggregate.parts:
+            - ref: thumb_reachy_tob
+            - ref: mirror_thumb_reachy_tob
+          shift: [0, -5]
+
+    #top outer
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: matrix_pinky_top
+          shift: [6, TOP+11] ##edited
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: mirror_matrix_pinky_top
+          shift: [6, TOP+11] ##edited
+    #bottom outer ##edited
+    - what: circle
+      radius: SCREWRADIUS
+      where: ##edited
+        - ref: matrix_middle_bottom
+          shift: [-2, -79]
+    - what: circle
+      radius: SCREWRADIUS
+      where: ##edited
+        - ref: mirror_matrix_middle_bottom
+          shift: [-2, -79]
+    #sides
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: matrix_pinky_bottom
+          shift: [-5, -18] ##edited
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: mirror_matrix_pinky_bottom
+          shift: [-5, -18] ##edited
+    # inner tucky sides
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: matrix_middle_bottom
+          shift: [-4, -17] ##new
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: mirror_matrix_middle_bottom
+          shift: [-4, -17] ##new
+    #- what: circle
+    #  radius: SCREWRADIUS+5
+    #  where:
+    #    - ref: thumb_tucky
+    #      shift: [-S-2, S+3]
+    # - what: circle
+    #   radius: SCREWRADIUS+3
+    #   where:
+    #     - ref: thumb_reachy_bob
+    #     - ref: mirror_thumb_reachy_bob
+    #       #shift: [-S-2, S-3]
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: matrix_inner_bottom ##edited
+          shift: [S+6, S+1] 
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: mirror_matrix_inner_bottom ##edited
+          shift: [S+6, S+1] 
+    #top inner, above switches
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: matrix_inner_top
+          shift: [7, S+6]
+    - what: circle
+      radius: SCREWRADIUS
+      where:
+        - ref: mirror_matrix_inner_top
+          shift: [7, S+6]
+      #thumb thin part, questionable plausability
+      #- what: circle
+      #  radius: SCREWRADIUS
+      #  where:
+      #    - ref: thumb_reachy_bob
+      #      shift: [12.5,S-20]
+      #- what: circle
+      #  radius: SCREWRADIUS
+      #  where:
+      #    - ref: mirror_thumb_reachy_bob
+      #      shift: [12.5,S-20]
+      #- what: circle
+      #  radius: SCREWRADIUS+6
+      #  where:
+      #    - aggregate.parts:
+      #      - ref: matrix_middle_top
+      #        shift: [S+1.5, TOP-1]
+
+  switchHolesMX:
+    - what: rectangle
+      where: true
+      bound: false
+      size: [MX, MX]
+  switchPlateMXpt1:
+    - name: board
+    - operation: subtract
+      name: mcu_slot
+      fillet: Fillet
+  switchPlateMX:
+    - name: switchPlateMXpt1
+    - operation: subtract
+      name: mcu_slot
+    - operation: subtract
+      name: switchHolesMX
+    # - operation: subtract
+    #   name: screwholes
+    - operation: subtract
+      name: buzzers
+
+
+  # backcoverScale:
+  #   - scale: 1.5
+  #     name: board
+  #   - operation: subtract
+  #     name: board
+  #   # - operation: stack
+  #   #   name: screwholes
+  # backcover:
+  #   what: board
+  #   fillet: Fillet
+
+    # - expand:  "10>"
+    #   name: board
+    # - operation: subtract
+    #   name: board
+    # # - operation: stack
+    #   name: screwholes
+
+  PCB:
+    - name: board
+    - operation: subtract
+      name: mcu_slot_reducefromboard
+      # fillet: Fillet
+      
+    # - operation: subtract
+    #   name: screwholes
+
+  switchChumkR:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_pinky_top
+          shift: [-S, +S]
+        - ref: matrix_pinky_bottom
+          shift: [-S, -S]
+        - ref: matrix_pinky_bottom
+          shift: [S, -S]
+        - ref: matrix_pinky_bottom
+          shift: [S, -1]
+        - ref: matrix_ring_bottom
+          shift: [S, -S]
+        - ref: matrix_ring_bottom
+          shift: [S, -5]
+        - ref: matrix_middle_bottom
+          shift: [0, -S]
+        #- ref: thumb_tuckyy
+        #  shift: [-S, S+5.9]
+        - ref: thumb_tuckyy
+          shift: [-S, S]
+        - ref: thumb_tuckyy
+          shift: [-S, -S]
+        - ref: thumb_thomr_bob
+          shift: [-S, -S]
+        - ref: thumb_reachy_bob
+          shift: [-S, -S]
+        - ref: thumb_reachy_bob
+          shift: [S, -S]
+        - ref: thumb_reachy_tob
+          shift: [S, S]
+        - ref: thumb_reachy_tob
+          shift: [-S, S]
+        - ref: thumb_thomr_tob
+          shift: [S, S]
+        - ref: thumb_thomr_tob
+          shift: [-S, S]
+        - ref: thumb_thomr_tob
+          shift: [-S-11, S]
+
+
+        - ref: matrix_inner_home
+          shift: [S, -S]
+          
+        - ref: matrix_inner_top
+          shift: [S, S]
+        - ref: matrix_inner_top
+          shift: [-S+1, S]
+        - ref: matrix_index_top
+          shift: [S, S]
+        - ref: matrix_index_top
+          shift: [-S, S]
+        - ref: matrix_middle_top
+          shift: [S, S]
+        - ref: matrix_middle_top
+          shift: [-S, S]
+        - ref: matrix_ring_top
+          shift: [S, S]
+        - ref: matrix_ring_top
+          shift: [-S, S]
+        - ref: matrix_pinky_top
+          shift: [S, S]
+
+  switchChumkL:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: mirror_matrix_pinky_top
+          shift: [-S, +S]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [-S, -S]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [S, -S]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [S, -1]
+        - ref: mirror_matrix_ring_bottom
+          shift: [S, -S]
+        - ref: mirror_matrix_ring_bottom
+          shift: [S, -5]
+        - ref: mirror_matrix_middle_bottom
+          shift: [0, -S]
+        #- ref: mirror_thumb_tuckyy
+        #  shift: [-S, S+5.9]
+        - ref: mirror_thumb_tuckyy
+          shift: [-S, S]
+        - ref: mirror_thumb_tuckyy
+          shift: [-S, -S]
+        - ref: mirror_thumb_thomr_bob
+          shift: [-S, -S]
+        - ref: mirror_thumb_reachy_bob
+          shift: [-S, -S]
+        - ref: mirror_thumb_reachy_bob
+          shift: [S, -S]
+        - ref: mirror_thumb_reachy_tob
+          shift: [S, S]
+        - ref: mirror_thumb_reachy_tob
+          shift: [-S, S]
+        - ref: mirror_thumb_thomr_tob
+          shift: [S, S]
+        - ref: mirror_thumb_thomr_tob
+          shift: [-S, S]
+        - ref: mirror_thumb_thomr_tob
+          shift: [-S-11, S]
+
+
+        - ref: mirror_matrix_inner_home
+          shift: [S, -S]
+          
+        - ref: mirror_matrix_inner_top
+          shift: [S, S]
+        - ref: mirror_matrix_inner_top
+          shift: [-S+1, S]
+        - ref: mirror_matrix_index_top
+          shift: [S, S]
+        - ref: mirror_matrix_index_top
+          shift: [-S, S]
+        - ref: mirror_matrix_middle_top
+          shift: [S, S]
+        - ref: mirror_matrix_middle_top
+          shift: [-S, S]
+        - ref: mirror_matrix_ring_top
+          shift: [S, S]
+        - ref: mirror_matrix_ring_top
+          shift: [-S, S]
+        - ref: mirror_matrix_pinky_top
+          shift: [S, S]
+
+
+  thumbrestArea:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: thumb_tuckyy
+          shift: [-S-1.5, -S+0.5]
+        - ref: thumb_thomr_bob
+          shift: [0,0]
+        - ref: thumb_reachy_bob
+          shift: [S+34, S-23]
+        - ref: thumb_reachy_bob
+          shift: [S+5, -S-65]
+    - what: polygon
+      operation: stack
+      points:
+        - ref: mirror_thumb_tuckyy
+          shift: [-S-1.5, -S+0.5]
+        - ref: mirror_thumb_thomr_bob
+          shift: [0,0]
+        - ref: mirror_thumb_reachy_bob
+          shift: [S+34, S-23]
+        - ref: mirror_thumb_reachy_bob
+          shift: [S+5, -S-65]
+  Topplate:
+    - name: board
+    - operation: subtract
+      name: switchChumkL
+    - operation: subtract
+      name: switchChumkR
+    - operation: subtract
+      name: thumbrestArea
+      fillet: Fillet
+    # - operation: subtract
+    #   name: screwholes
+
+   # - what: polygon
+  TopplateMinusMCU:
+    - name: PCB
+    # - operation: subtract
+    #   name: screwholes
+    - operation: subtract
+      name: thumbrestArea
+      fillet: Fillet
+    - operation: subtract
+      name: switchChumkL
+    - operation: subtract
+      name: switchChumkR
+   # - what: polygon
+  PCBRoundedMinusMCU:
+    - name: board
+    - operation: subtract
+      name: mcu_slot_reducefromboard
+      fillet: Fillet
+
+  BottomFoam:
+    - name: board
+    - operation: subtract
+      name: switchChumkL
+    - operation: subtract
+      name: switchChumkR
+    - operation: subtract
+      name: screwholes
+    #- operation: subtract
+    #  name: thumbrestArea
+  RGBees:
+    - what: circle #bottom middle
+      radius: LEDsize
+      where:
+        ref: 
+          [thumb_reachy_tob]
+        shift: [5, 13]
+    - what: circle  #bottom middle mirror
+      radius: LEDsize
+      where:
+        ref: 
+          [mirror_thumb_reachy_tob]
+        shift: [5, 13]
+    - what: circle  #top outer
+      radius: LEDsize
+      where:
+        - ref: matrix_ring_top
+          shift: [8, TOP+9]
+    - what: circle
+      radius: LEDsize
+      where:
+        - ref: mirror_matrix_ring_top
+          shift: [8, TOP+9]
+    - what: circle  #bottom outer
+      radius: LEDsize
+      where:
+        - ref: matrix_middle_top
+          shift: [-15, -103]
+    - what: circle
+      radius: LEDsize
+      where:
+        - ref: mirror_matrix_middle_top
+          shift: [-15, -103]
+    - what: circle
+      radius: LEDsize
+      where:
+        - ref: matrix_middle_top
+          shift: [10, -110]
+    - what: circle
+      radius: LEDsize
+      where:
+        - ref: mirror_matrix_middle_top
+          shift: [10, -110]
+    - what: circle  #sides
+      radius: LEDsize
+      where:
+        - ref: matrix_pinky_bottom
+          shift: [3, -29]
+    - what: circle
+      radius: LEDsize
+      where:
+        - ref: mirror_matrix_pinky_bottom
+          shift: [3, -29]
+    - what: circle   #thumb bottom
+      radius: LEDsize
+      where:
+        - ref: thumb_reachy_bob
+          shift: [-6, -25]
+    - what: circle
+      radius: LEDsize
+      where:
+        - ref: mirror_thumb_reachy_bob
+          shift: [-6, -25]
+  
+    - what: circle #top middle  
+      radius: LEDsize
+      where:
+        - ref: mirror_matrix_inner_top
+          shift: [5, 50]
+    - what: circle
+      radius: LEDsize
+      where:
+        - ref: matrix_inner_top
+          shift: [5, 50]
+    - what: circle  #pinkey outer
+      radius: LEDsize
+      where:
+        - aggregate.parts:
+          - ref: matrix_pinky_top
+            shift: [-12, 0]
+    - what: circle
+      radius: LEDsize
+      where:
+        - aggregate.parts:
+          - ref: mirror_matrix_pinky_top
+            shift: [-12, 0]
+
+
+  middle_layer:
+    - name: board
+    - operation: subtract
+      name: switch
+    - operation: subtract
+      name: mcu_slot
+    - operation: subtract
+      name: diode_slots
+    - operation: subtract
+      name: RGBees
+    #- operation: subtract
+    #  name: matrix_hole
+    #- operation: subtract
+    #  name: batt_slot
+
+
+  middle_layer2:
+    - name: board
+    - operation: subtract
+      name: switch
+    - operation: subtract
+      name: mcu_slot
+    - operation: subtract
+      name: diode_slots
+    - operation: subtract
+      name: RGBees
+    #- operation: subtract
+    #  name: matrix_hole
+    #- operation: subtract
+    #  name: batt_slot
+
+
+  demo_outline:
+    - name: board
+    - operation: stack
+      name: keys
+    - operation: stack
+      name: screwholes
+    - operation: subtract
+      name: mcu_slot
+    - operation: stack
+      name: RGBees
+    - operation: stack
+      name: Topplate
+    - operation: stack
+      name: buzzers
+  demo_outline_topplate:
+    - name: TopplateMinusMCU
+    - operation: stack
+      name: keys
+    - operation: stack
+      name: screwholes
+    - operation: subtract
+      name: mcu_slot_reducefromboard
+    # - operation: stack
+    #   name: RGBees
+    # - operation: stack
+    #   name: TopplateMinusMCU
+    - operation: stack
+      name: buzzers
+      
+  first:
+    - what: outline
+      name: demo_outline
+   
+pcbs:
+
+  A4MX_PCB:
+    outlines:
+      main:
+        outline: PCBRoundedMinusMCU
+        layer: Edge.Cuts
+      # silkscreen:
+      #   outline: screwholes
+      #   layer: B.SilkS
+      # silkscreen1:
+      #   outline: Topplate
+      #   layer: F.SilkS
+      # silkscreen2:
+      #   outline: demo_outline
+      #   layer: F.SilkS
+      silkscreen3:
+        outline: switch
+        layer: F.SilkS
+      # silkscreen4:
+      #   outline: middle_layer
+      #   layer: F.SilkS
+      silkscreen5:
+        outline: diode_slots
+        layer: F.SilkS
+          # silkscreen6:
+          #   outline: buzzers
+          #   layer: F.SilkS
+
+    footprints:
+      MXFootprint:
+        what: mxFix
+        where: true
+        params:
+          from: "{{col_net}}"
+          to: "{{colrow}}"
+          keycaps: false
+      MXHotSwap:
+        what: mxFix
+        where: true
+        params:
+          from: "{{col_net}}"
+          to: "{{colrow}}"
+          keycaps: false
+          hotswap: true
+        adjust:
+          rotate: 180
+      chocFootprintHome:
+        what: chocFix
+        adjust:
+          shift: [0, 0]
+          #rotate: 180
+        where: /home/
+        params:
+          from: "{{col_net}}"
+          to: "{{colrow}}"
+          keycaps: true
+      chocFootprintTop:
+        what: chocFix
+        adjust:
+          shift: [0, -1.9]
+          #rotate: 180
+        where: /top/
+        params:
+          from: "{{col_net}}"
+          to: "{{colrow}}"
+          keycaps: true
+            # chocFootprintHome:
+            #   what: choc
+            #   adjust:
+            #     shift: [0, 0]
+            #     rotate: 180
+            #   where: /home/
+            #   params:
+            #     from: "{{col_net}}"
+            #     to: "{{colrow}}"
+            #     keycaps: true
+      chocFootprintBottom:
+        what: chocFix
+        adjust:
+          shift: [0, 1.9]
+          #rotate: 180
+        where: /bottom/
+        params:
+          from: "{{col_net}}"
+          to: "{{colrow}}"
+          keycaps: true
+      chocFootprintTuckyyy:
+        what: chocFix
+        adjust:
+          shift: [1, 0]
+          rotate: 180
+        where: /tucky/
+        params:
+          from: "{{colrow}}"
+          to: "{{col_net}}"
+          keycaps: true
+      chocFootprintTHome:
+        what: chocFix
+        adjust:
+          shift: [0, 0]
+          rotate: 180
+        where: /thomr/
+        params:
+          from: "{{colrow}}"
+          to: "{{col_net}}"
+          keycaps: true
+      chocFootprintReachy:
+        what: chocFix
+        adjust:
+          shift: [-0.5, -0.5]
+          rotate: 180
+        where: /reachy/
+        params:
+          from: "{{colrow}}"
+          to: "{{col_net}}"
+          keycaps: true
+      diode_thumbtop:
+        what: diodeIMPROVED
+        where: [/thumb_reachy_tob/,/mirror_thumb_reachy_tob/,/thumb_thomr_tob/,/mirror_thumb_thomr_tob/]
+        #where: /thumb*_tob/
+        params:
+          from: "{{row_net}}"
+          to: "{{colrow}}"
+        adjust:
+          shift: [0, +9]
+          rotate: 0
+      diode_thumbottom:
+        what: diodeIMPROVED
+        #where: /thumb*_bob/
+        where:  [/thumb_tucky/,/thumb_tuckyy/ ,/mirror_thumb_tucky/,/mirror_thumb_tuckyy/ , /thumb_reachy_bob/,/mirror_thumb_reachy_bob/,/thumb_thomr_bob/,/mirror_thumb_thomr_bob/]
+        params:
+          from: "{{row_net}}"
+          to: "{{colrow}}"
+        adjust:
+          shift: [-9, 4.5]
+          rotate: -90
+          # shift: [0, +9]
+          #  rotate: 0
+      diode_matrix:
+        what: diodeIMPROVED
+        where: -/thumb/
+        adjust:
+          shift: [-0, -9.5]
+          rotate: 0 #-90
+        params:
+          from: "{{row_net}}"
+          to: "{{colrow}}"
+      nice_nano:
+        # what: nice_nano
+        what: MCUEliteNano #promicro
+        where:
+          aggregate.parts:
+            - ref: matrix_index_top
+          shift: [12, 28]
+          rotate: 0
+        params:
+          orientation: down
+          # slider_r:
+          #   what: slider
+          #   where:
+          #     ref:
+          #       - matrix_middle_top
+          #     shift: [0, 23]
+          #     rotate: 0
+          #   params:
+          #     side:
+          #     to: P15
+          #     from: pos
+      ONOFFSLIDER:
+        what: slider
+        params:
+          from: pos
+          to: RAW
+        where:
+          ref:
+            - matrix_middle_top
+          shift: [-15, 14.5]
+          rotate: -5
+        #adjust.shift: [100, 100]
+      LEDSLIDER:
+        what: slider
+        params:
+          from: VCC
+          to: LEDVCCIN
+        where:
+          ref:
+            - matrix_middle_top
+          shift: [4, 13]
+          rotate: -5
+        #adjust.shift: [100, 100]
+      reset_switch_smd_side:
+        # what: button
+        # where:
+        #   ref:
+        #     - matrix_middle_top
+        #   shift: [14, 12.5]
+        #   rotate: -5
+        # # where:
+        # #   aggregate.parts:
+        # #     - ref: thumb_reachy_bob
+        # #     - ref: mirror_thumb_reachy_bob
+        # #   shift: [0, 7]
+        # #   rotate: 0
+        # params:
+        #   from: GND
+        #   to: RST
+        what: reset_switch_smd_side
+        where:
+          ref:
+            - matrix_middle_top
+          shift: [-6, 13.5]
+          rotate: -5
+        params:
+          include_courtyard: false
+          # from: GND
+          # to: RST
+      jstphhhh:
+        what: jstph
+        params:
+          pos: pos
+          neg: GND
+        where:
+          aggregate.parts:
+            - ref: thumb_reachy_tob
+            - ref: mirror_thumb_reachy_tob
+        # where:
+        #   ref:
+        #     - matrix_inner_bottom
+          shift: [0, 5]
+          rotate: 180 
+      jstphhhh2:
+        what: jstph
+        params:
+          pos: pos
+          neg: GND
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_top
+#            - ref: mirror_thumb_reachy_tob
+        # where:
+        #   ref:
+        #     - matrix_inner_bottom
+          shift: [0, 28]
+          rotate: -90 
+        #adjust.shift: [50, 0]
+      #jmprrr:
+      #  what: jumper
+      #  params:
+      #    from: from
+      #    to: to
+      #  where:
+      #    ref:
+      #      - matrix_inner_bottom
+      #    shift: [15, 0]
+      #    rotate: 0
+        #adjust.shift: [100, 0]
+      i2c_resistor:
+        what: smd_resistor
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [4, 5]
+        params:
+          from: T2
+          side: "B"
+          to: T3
+      i2c_resistor2:
+        what: smd_resistor
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [4, 2]
+        params:
+          side: "B"
+          from: T2
+          to: T4
+      i2c_resistor3:
+        what: smd_resistor
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [4, -1]
+        params:
+          side: "B"
+          from: T2
+          to: T5
+      i2c_resistor4:
+        what: smd_resistor
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [4, -4]
+        params:
+          side: "B"
+          from: T2
+          to: T6
+      trackpad:
+        what: azoteq_tps43
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [23, 3] #shift: [18, 30.5]
+      # fpad:
+      #   what: jumper
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_top
+      #       - ref: mirror_matrix_inner_top
+      #     shift: [1, 14]
+      #     rotate: 90
+      #   params:
+      #     from: O2
+      #     to: IO23
+      # fpad2:
+      #   what: jumper
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_top
+      #       - ref: mirror_matrix_inner_top
+      #     shift: [3, 14]
+      #     rotate: 90
+      #   params:
+      #     from: BPin
+      #     to: IO20
+      fpad3:
+        what: jumper
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [-4, 12] #shift: [5, 14]
+          rotate: 90
+        params:
+          from: GNDPad
+          to: GND
+          side: B
+      # fpad4:
+      #   what: jumper
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_top
+      #       - ref: mirror_matrix_inner_top
+      #     shift: [7, 14]
+      #     rotate: 90
+      #   params:
+      #     from: APin
+      #     to: IO22
+      pad:
+        what: jumper
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [1, 12]
+          rotate: 90
+        params:
+          from: T1
+          to: GND
+          side: B
+      pad2:
+        what: jumper
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [3, 12]
+          rotate: 90
+        params:
+          from: T2
+          to: VCC
+          side: B
+      pad3:
+        what: jumper
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [5, 12]
+          rotate: 90
+        params:
+          from: T3
+          to: TP3
+          side: B
+      pad4:
+        what: jumper
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [7, 12]
+          rotate: 90
+        params:
+          from: T4
+          to: TP4
+          side: B
+      pad5:
+        what: jumper
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [9, 12]
+          rotate: 90
+        params:
+          from: T5
+          to: TP5
+          side: B
+      pad6:
+        what: jumper
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [11, 12]
+          rotate: 90
+        params:
+          from: T6
+          to: TP6
+          side: B
+      trackpad_headers:
+        what: pinheaders
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [0, 8]
+          rotate: 90
+        params:
+          T1: T1
+          T2: T2
+          T3: T3
+          T4: T4
+          T5: T5
+          T6: T6
+      # niceView:
+      #   what: nice_view
+      #   # params:
+      #   #   SDA: P2 #SDA
+      #   #   SCL: P3 #SCL
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_home
+      #       - ref: mirror_matrix_inner_home
+      #     shift: [-6, -5]
+      #     rotate: -90
+      # oledddTop:
+      #   what: oled
+      #   params:
+      #     SDA: P2 #SDA
+      #     SCL: P3 #SCL
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_top
+      #       - ref: mirror_matrix_inner_top
+      #     shift: [0,30]
+      #     rotate: 90
+      # oledCentre:
+        # what: oled
+        # params:
+        #   SDA: P2 #SDA
+        #   SCL: P3 #SCL
+        # where:
+        #   aggregate.parts:
+        #     - ref: matrix_inner_home
+        #     - ref: mirror_matrix_inner_home
+        #   shift: [-32, 0]
+      LEDBreakout:
+        what: oled
+        params:
+          SDA: SDA
+          SCL: P1 #SCL
+          designator: LEDBreakout3Pin
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [30, 40]
+          rotate: 90
+      STATUSLED_TOP:
+        what: rgb
+        params:
+          side: F
+          din: StatusLedPin
+          VCC: VCC
+          dout: deadEnd
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [50, 42]
+          #rotate: 90
+#          rotate: 0
+        #adjust.shift: [0, 50]
+      # omronnn:
+      #   what: omron
+      #   params:
+      #     from: from
+      #     to: to
+      #   where:
+      #     ref:
+      #       - matrix_inner_bottom
+      #     shift: [45, -33]
+      #     rotate: 0
+        #adjust.shift: [50, 50]
+
+      RGB01:
+      #top middle
+        what: rgb
+        params:
+          side: B
+          din: rgbOut01
+          dout: none
+          VCC: LEDVCC
+        where:
+          ref: matrix_inner_top
+          shift: [5, 50]
+          rotate: 20
+      RGB02:
+      #top middle
+        what: rgb
+        params:
+          side: B
+          din: rgbOut02
+          dout: rgbOut01
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_inner_top
+          shift: [5, 50]
+          rotate: 20
+      RGB04top outer:
+        what: rgb
+        params:
+          side: B
+          din: rgbOut04
+          dout: rgbOut03
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_ring_top
+          shift: [8, TOP+12]
+          rotate: 22
+      RGB05:
+      #pinkey outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut05
+          dout: rgbOut04
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_pinky_top
+          shift: [-13, 0]
+          rotate: 85
+      RGB06:
+      #sides
+        what: rgb
+        params:
+          side: B
+          din: rgbOut06
+          dout: rgbOut05
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_pinky_bottom
+          shift: [3, -29]
+          rotate: 120
+      RGB07:
+      #bottom outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut07
+          dout: rgbOut06
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_middle_top
+          shift: [-15, -103]
+          rotate: 120
+      RGB08:
+      #bottom outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut08
+          dout: rgbOut07
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_middle_top
+          shift: [10, -110]
+          rotate: 180
+      RGB09:
+      #thumb bottom
+        what: rgb
+        params:
+          side: B
+          din: rgbOut09
+          dout: rgbOut08
+          VCC: LEDVCC
+        where:
+          ref: mirror_thumb_reachy_bob
+          shift: [-6, -25]
+          rotate: -90
+
+      RGB10:
+        what: rgb
+        params:
+          side: B
+          din: rgbOut09
+          dout: rgbOut10
+          VCC: LEDVCC
+        where:
+          ref: 
+            [mirror_thumb_reachy_tob]
+          shift: [5, 16]
+          rotate: -90
+
+      RGB11BOTTOM_CTR:
+        what: rgb
+        params:
+          side: B
+          din: rgbOut10
+          dout: rgbOut11
+          VCC: LEDVCC
+        where:
+          ref: 
+            [thumb_reachy_tob]
+          shift: [5, 16]
+          rotate: -90
+      RGB12:
+      #thumb bottom
+        what: rgb
+        params:
+          side: B
+          din: rgbOut12
+          dout: rgbOut11
+          VCC: LEDVCC
+        where:
+          ref: thumb_reachy_bob
+          shift: [-6, -25]
+          rotate: -90
+      RGB13:
+      #bottom outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut13
+          dout: rgbOut12
+          VCC: LEDVCC
+        where:
+          ref: matrix_middle_top
+          shift: [10, -110]
+          rotate: 180
+      RGB14:
+      #bottom outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut14
+          dout: rgbOut13
+          VCC: LEDVCC
+        where:
+          ref: matrix_middle_top
+          shift: [-15, -103]
+          rotate: 120
+      RGB15:
+      #sides
+        what: rgb
+        params:
+          side: B
+          din: rgbOut15
+          dout: rgbOut14
+          VCC: LEDVCC
+        where:
+          ref: matrix_pinky_bottom
+          shift: [3, -29]
+          rotate: 120
+          
+      RGB16:
+      #pinkey outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut16
+          dout: rgbOut15
+          VCC: LEDVCC
+        where:
+          ref: matrix_pinky_top
+          shift: [-13, 0]
+          rotate: 85
+      RGB17top outer:
+        what: rgb
+        params:
+          side: B
+          din: LedPin
+          dout: rgbOut16
+          VCC: LEDVCCIN #LEDVCCIN
+          designator: LED17
+        where:
+          ref: matrix_ring_top
+          shift: [0, TOP+9]
+
+
+      rotaryyyyy:
+        what: rotary
+        params:
+          from: mirror_thomr_tob
+          to: ColThumbTucky #P20
+          A: Rotary1APin
+          B: Rotary1BPin
+          C: GNDPad
+        where:
+          ref: mirror_thumb_thomr_tob
+          shift: [5,-0.5]
+      scrollwheeeee:
+        what: scrollwheel
+        params:
+          from: thomr_tob
+          to: ColThumbTucky #P20
+          A: GNDPad
+          B: Rotary2APin
+          C: Rotary2BPin
+          D: NotSure
+        where:
+          ref: thumb_thomr_tob
+          shift: [-2.9,0]
+      pad1BuzzerL:
+        what: pad
+        params:
+          net: GND
+          #text: buzzerLPAD
+          mirrored: true
+          width: 2.5
+          height: 2.5
+        where:
+          ref: thumb_tuckyy
+          shift: [-S-11-5, -5]
+      pad2BuzzerL:
+        what: pad
+        params:
+          net: Buzzer1
+          mirrored: true
+          width: 2.5
+          height: 2.5
+        where:
+          ref: thumb_tuckyy
+          shift: [-S-11+5, -5]
+      pad1BuzzerR:
+        what: pad
+        params:
+          net: GND
+          #text: buzzerLPAD
+          mirrored: true
+          width: 2.5
+          height: 2.5
+        where:
+          ref: mirror_thumb_tuckyy
+          shift: [-S-11-5, -5]
+      pad2BuzzerR:
+        what: pad
+        params:
+          net: Buzzer2
+          mirrored: true
+          width: 2.5
+          height: 2.5
+        where:
+          ref: mirror_thumb_tuckyy
+          shift: [-S-11+5, -5]
+      buzzer12R:
+        what: buzzer12
+        params:
+          net: Buzzer1
+        where:
+          ref: thumb_tuckyy
+          shift: [-S-12, 1]
+      buzzer12L:
+        what: buzzer12
+        params:
+          net: Buzzer2
+        where:
+          ref: mirror_thumb_tuckyy
+          shift: [-S-10, 1]
+    
+
+      mountinghole_top_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [0, 43]
+      # M3Mounting1:  
+      #   what: M3Mounting
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_home
+      #     shift: [25, 0]
+      #     rotate: 0
+    #bottom middle
+      mountinghole_bottom_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: thumb_reachy_tob
+            - ref: mirror_thumb_reachy_tob
+          shift: [0, -4]
+  
+    #top outer
+      mountinghole_top_outer:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_top
+          shift: [6, TOP+12]
+      mountinghole_top_outer2:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_top
+          shift: [-6, TOP+12] #replaced plus with minus here
+    #bottom outer
+      mountinghole_bottom_outer:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -80]
+      mountinghole_bottom_outer2:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -80] #replaced minux with plus here
+    #sides
+      mountinghole_sides:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_bottom
+          shift: [-6, -18]
+      mountinghole_sides2:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_bottom
+          shift: [6, -18] #replaced minux with plus here
+      mountinghole_innermiddlebottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -17]
+      mountinghole_innermiddlebottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -17]
+      mountinghole_inner_OLED_Bottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_home
+          shift: [17, -10]
+      mountinghole_inner_OLED_BottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_home
+          shift: [-17, -10]
+      mountinghole_inner_OLED_Top:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+          shift: [5, 16]
+      mountinghole_inner_OLED_TopL:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_top
+          shift: [-5, 16]
+            # mountinghole_sides5:  
+            #   what: M3Mounting #sides
+            #   where:
+            #     aggregate.parts:
+            #       - ref: matrix_inner_top
+            #     shift: [46, S-10]
+            # mountinghole_sides6:  
+            #   what: M3Mounting #sides
+            #   where:
+            #     aggregate.parts:
+            #       - ref: matrix_inner_bottom
+            #     shift: [46, S-8]
+            # mountinghole_sides7:  
+            #   what: M3Mounting #sides
+            #   where:
+            #     aggregate.parts:
+            #       - ref: matrix_inner_top
+            #     shift: [16, S-10]
+            # mountinghole_sides8:  
+            #   what: M3Mounting #sides
+            #   where:
+            #     aggregate.parts:
+            #       - ref: matrix_inner_bottom
+            #     shift: [16, S-8]
+            # mountinghole_sides9:  
+            #   what: M3Mounting #sides
+            #   where:
+            #     aggregate.parts:
+            #       - ref: matrix_inner_bottom
+            #     shift: [46, S-17]
+            # mountinghole_sides10:  
+            #   what: M3Mounting #sides
+            #   where:
+            #     aggregate.parts:
+            #       - ref: matrix_middle_top
+            #     shift: [S+1.5, TOP-1]
+
+  A4MX_SwitchPlate:
+    outlines:
+      main:
+        outline: switchPlateMX
+        layer: Edge.Cuts
+    footprints:
+      mountinghole_top_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [0, 43]
+            # M3Mounting1:  
+            #   what: M3Mounting
+            #   where:
+            #     aggregate.parts:
+            #       - ref: matrix_inner_home
+            #     shift: [25, 0]
+            #     rotate: 0
+          #bottom middle
+      mountinghole_bottom_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: thumb_reachy_tob
+            - ref: mirror_thumb_reachy_tob
+          shift: [0, -4]
+  
+    #top outer
+      mountinghole_top_outer:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_top
+          shift: [6, TOP+12]
+      mountinghole_top_outer2:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_top
+          shift: [-6, TOP+12] #replaced plus with minus here
+    #bottom outer
+      mountinghole_bottom_outer:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -80]
+      mountinghole_bottom_outer2:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -80] #replaced minux with plus here
+    #sides
+      mountinghole_sides:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_bottom
+          shift: [-6, -18]
+      mountinghole_sides2:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_bottom
+          shift: [6, -18] #replaced minux with plus here
+      mountinghole_innermiddlebottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -17]
+      mountinghole_innermiddlebottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -17]
+      mountinghole_inner_OLED_Bottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_home
+          shift: [17, -10]
+      mountinghole_inner_OLED_BottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_home
+          shift: [-17, -10]
+      mountinghole_inner_OLED_Top:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+          shift: [5, 16]
+      mountinghole_inner_OLED_TopL:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_top
+          shift: [-5, 16]
+      # mountinghole_sides5:  
+      LEDBreakout:
+        what: LEDBreakoutPins
+        params:
+          Data: LedPin
+          VCC: VCC #SCL
+          GND: GND
+          designator: LEDBreakout3Pin
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [30, 40]
+          rotate: 90
+      STATUSLED_TOP:
+        what: rgb
+        params:
+          side: F
+          din: StatusLedPin
+          VCC: VCC
+          dout: deadEnd
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [50, 42]
+#          rotate: 0
+        #adjust.shift: [0, 50]
+      # omronnn:
+      #   what: omron
+      #   params:
+      #     from: from
+      #     to: to
+      #   where:
+      #     ref:
+      #       - matrix_inner_bottom
+      #     shift: [45, -33]
+      #     rotate: 0
+        #adjust.shift: [50, 50]
+
+      RGB01:
+      #top middle
+        what: rgb
+        params:
+          side: B
+          din: rgbOut01
+          dout: none
+          VCC: LEDVCC
+        where:
+          ref: matrix_inner_top
+          shift: [5, 50]
+          rotate: 20
+      RGB02:
+      #top middle
+        what: rgb
+        params:
+          side: B
+          din: rgbOut02
+          dout: rgbOut01
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_inner_top
+          shift: [5, 50]
+          rotate: 20
+      RGB04top outer:
+        what: rgb
+        params:
+          side: B
+          din: rgbOut04
+          dout: rgbOut03
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_ring_top
+          shift: [8, TOP+12]
+          rotate: 22
+      RGB05:
+      #pinkey outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut05
+          dout: rgbOut04
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_pinky_top
+          shift: [-13, 0]
+          rotate: 85
+      RGB06:
+      #sides
+        what: rgb
+        params:
+          side: B
+          din: rgbOut06
+          dout: rgbOut05
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_pinky_bottom
+          shift: [3, -29]
+          rotate: 120
+      RGB07:
+      #bottom outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut07
+          dout: rgbOut06
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_middle_top
+          shift: [-15, -103]
+          rotate: 120
+      RGB08:
+      #bottom outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut08
+          dout: rgbOut07
+          VCC: LEDVCC
+        where:
+          ref: mirror_matrix_middle_top
+          shift: [10, -110]
+          rotate: 180
+      RGB09:
+      #thumb bottom
+        what: rgb
+        params:
+          side: B
+          din: rgbOut09
+          dout: rgbOut08
+          VCC: LEDVCC
+        where:
+          ref: mirror_thumb_reachy_bob
+          shift: [-6, -25]
+          rotate: -90
+
+      RGB10:
+        what: rgb
+        params:
+          side: B
+          din: rgbOut09
+          dout: rgbOut10
+          VCC: LEDVCC
+        where:
+          ref: 
+            [mirror_thumb_reachy_tob]
+          shift: [5, 16]
+          rotate: -90
+
+      RGB11BOTTOM_CTR:
+        what: rgb
+        params:
+          side: B
+          din: rgbOut10
+          dout: rgbOut11
+          VCC: LEDVCC
+        where:
+          ref: 
+            [thumb_reachy_tob]
+          shift: [5, 16]
+          rotate: -90
+      RGB12:
+      #thumb bottom
+        what: rgb
+        params:
+          side: B
+          din: rgbOut12
+          dout: rgbOut11
+          VCC: LEDVCC
+        where:
+          ref: thumb_reachy_bob
+          shift: [-6, -25]
+          rotate: -90
+      RGB13:
+      #bottom outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut13
+          dout: rgbOut12
+          VCC: LEDVCC
+        where:
+          ref: matrix_middle_top
+          shift: [10, -110]
+          rotate: 180
+      RGB14:
+      #bottom outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut14
+          dout: rgbOut13
+          VCC: LEDVCC
+        where:
+          ref: matrix_middle_top
+          shift: [-15, -103]
+          rotate: 120
+      RGB15:
+      #sides
+        what: rgb
+        params:
+          side: B
+          din: rgbOut15
+          dout: rgbOut14
+          VCC: LEDVCC
+        where:
+          ref: matrix_pinky_bottom
+          shift: [3, -29]
+          rotate: 120
+          
+      RGB16:
+      #pinkey outer
+        what: rgb
+        params:
+          side: B
+          din: rgbOut16
+          dout: rgbOut15
+          VCC: LEDVCC
+        where:
+          ref: matrix_pinky_top
+          shift: [-13, 0]
+          rotate: 85
+      RGB17top outer:
+        what: rgb
+        params:
+          side: B
+          din: LedPin
+          dout: rgbOut16
+          VCC: LEDVCCIN #LEDVCCIN
+          designator: LED17
+        where:
+          ref: matrix_ring_top
+          shift: [8, TOP+9]
+
+  A4MX_TopPlate:
+    outlines:
+      main:
+        outline: Topplate
+        layer: Edge.Cuts
+    footprints:
+      mountinghole_top_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [0, 43]
+      # M3Mounting1:  
+      #   what: M3Mounting
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_home
+      #     shift: [25, 0]
+      #     rotate: 0
+    #bottom middle
+      mountinghole_bottom_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: thumb_reachy_tob
+            - ref: mirror_thumb_reachy_tob
+          shift: [0, -4]
+  
+    #top outer
+      mountinghole_top_outer:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_top
+          shift: [6, TOP+12]
+      mountinghole_top_outer2:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_top
+          shift: [-6, TOP+12] #replaced plus with minus here
+    #bottom outer
+      mountinghole_bottom_outer:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -80]
+      mountinghole_bottom_outer2:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -80] #replaced minux with plus here
+    #sides
+      mountinghole_sides:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_bottom
+          shift: [-6, -18]
+      mountinghole_sides2:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_bottom
+          shift: [6, -18] #replaced minux with plus here
+      mountinghole_innermiddlebottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -17]
+      mountinghole_innermiddlebottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -17]
+      mountinghole_inner_OLED_Bottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_home
+          shift: [17, -10]
+      mountinghole_inner_OLED_BottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_home
+          shift: [-17, -10]
+      mountinghole_inner_OLED_Top:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+          shift: [5, 16]
+      mountinghole_inner_OLED_TopL:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_top
+          shift: [-5, 16]
+
+
+
+  A4MX_TopPlateMinusMCU:
+    outlines:
+      main:
+        outline: TopplateMinusMCU
+        layer: Edge.Cuts
+    footprints:
+      mountinghole_top_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [0, 43]
+      # M3Mounting1:  
+      #   what: M3Mounting
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_home
+      #     shift: [25, 0]
+      #     rotate: 0
+    #bottom middle
+      mountinghole_bottom_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: thumb_reachy_tob
+            - ref: mirror_thumb_reachy_tob
+          shift: [0, -4]
+  
+    #top outer
+      mountinghole_top_outer:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_top
+          shift: [6, TOP+12]
+      mountinghole_top_outer2:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_top
+          shift: [-6, TOP+12] #replaced plus with minus here
+    #bottom outer
+      mountinghole_bottom_outer:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -80]
+      mountinghole_bottom_outer2:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -80] #replaced minux with plus here
+    #sides
+      mountinghole_sides:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_bottom
+          shift: [-6, -18]
+      mountinghole_sides2:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_bottom
+          shift: [6, -18] #replaced minux with plus here
+      mountinghole_innermiddlebottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -17]
+      mountinghole_innermiddlebottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -17]
+      mountinghole_inner_OLED_Bottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_home
+          shift: [17, -10]
+      mountinghole_inner_OLED_BottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_home
+          shift: [-17, -10]
+      mountinghole_inner_OLED_Top:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+          shift: [5, 16]
+      mountinghole_inner_OLED_TopL:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_top
+          shift: [-5, 16]
+
+  A4MX_BackPlate:
+    outlines:
+      main:
+        outline: boardfiletted
+        layer: Edge.Cuts
+    footprints:
+      mountinghole_top_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [0, 43]
+      # M3Mounting1:  
+      #   what: M3Mounting
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_home
+      #     shift: [25, 0]
+      #     rotate: 0
+    #bottom middle
+      mountinghole_bottom_middletest:  
+        what: M3Mounting
+        where:
+          aggregate.parts:
+            - ref: thumb_reachy_tob
+            - ref: mirror_thumb_reachy_tob
+          shift: [0, -4]
+  
+    #top outer
+      mountinghole_top_outer:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_top
+          shift: [6, TOP+12]
+      mountinghole_top_outer2:  
+        what: M3Mounting #top outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_top
+          shift: [-6, TOP+12] #replaced plus with minus here
+    #bottom outer
+      mountinghole_bottom_outer:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -80]
+      mountinghole_bottom_outer2:  
+        what: M3Mounting #bottom outer
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -80] #replaced minux with plus here
+    #sides
+      mountinghole_sides:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_pinky_bottom
+          shift: [-6, -18]
+      mountinghole_sides2:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_pinky_bottom
+          shift: [6, -18] #replaced minux with plus here
+      mountinghole_innermiddlebottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_middle_bottom
+          shift: [-4, -17]
+      mountinghole_innermiddlebottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_middle_bottom
+          shift: [4, -17]
+      mountinghole_inner_OLED_Bottom:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_home
+          shift: [17, -10]
+      mountinghole_inner_OLED_BottomL:  
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_home
+          shift: [-17, -10]
+      mountinghole_inner_OLED_Top:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+          shift: [5, 16]
+      mountinghole_inner_OLED_TopL:
+        what: M3Mounting #sides
+        where:
+          aggregate.parts:
+            - ref: mirror_matrix_inner_top
+          shift: [-5, 16]
+      # # mountinghole_sides5:  
+      # LEDBreakout:
+      #   what: oled
+      #   params:
+      #     SDA: SDA
+      #     SCL: LedPin #P1 #SCL
+      #     designator: LEDBreakout3Pin
+      #   where:
+      #     aggregate.parts:
+      #       - ref: matrix_inner_top
+      #       - ref: mirror_matrix_inner_top
+      #     shift: [30, 40]
+      #     rotate: 90
+#          rotate: 0
+        #adjust.shift: [0, 50]
+      # omronnn:
+      #   what: omron
+      #   params:
+      #     from: from
+      #     to: to
+      #   where:
+      #     ref:
+      #       - matrix_inner_bottom
+      #     shift: [45, -33]
+      #     rotate: 0
+        #adjust.shift: [50, 50]
+
+      # RGB01:
+      # #top middle
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut01
+      #     dout: none
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: matrix_inner_top
+      #     shift: [5, 50]
+      #     rotate: 20
+      # RGB02:
+      # #top middle
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut02
+      #     dout: rgbOut01
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: mirror_matrix_inner_top
+      #     shift: [5, 50]
+      #     rotate: 20
+      # RGB04top outer:
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut04
+      #     dout: rgbOut03
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: mirror_matrix_ring_top
+      #     shift: [8, TOP+12]
+      #     rotate: 22
+      # RGB05:
+      # #pinkey outer
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut05
+      #     dout: rgbOut04
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: mirror_matrix_pinky_top
+      #     shift: [-13, 0]
+      #     rotate: 85
+      # RGB06:
+      # #sides
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut06
+      #     dout: rgbOut05
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: mirror_matrix_pinky_bottom
+      #     shift: [3, -29]
+      #     rotate: 120
+      # RGB07:
+      # #bottom outer
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut07
+      #     dout: rgbOut06
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: mirror_matrix_middle_top
+      #     shift: [-15, -103]
+      #     rotate: 120
+      # RGB08:
+      # #bottom outer
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut08
+      #     dout: rgbOut07
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: mirror_matrix_middle_top
+      #     shift: [10, -110]
+      #     rotate: 180
+      # RGB09:
+      # #thumb bottom
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut09
+      #     dout: rgbOut08
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: mirror_thumb_reachy_bob
+      #     shift: [-6, -25]
+      #     rotate: -90
+      # RGB10:
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut09
+      #     dout: rgbOut10
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: 
+      #       [mirror_thumb_reachy_tob]
+      #     shift: [5, 16]
+      #     rotate: -90
+      # RGB11BOTTOM_CTR:
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut10
+      #     dout: rgbOut11
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: 
+      #       [thumb_reachy_tob]
+      #     shift: [5, 16]
+      #     rotate: -90
+      # RGB12:
+      # #thumb bottom
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut12
+      #     dout: rgbOut11
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: thumb_reachy_bob
+      #     shift: [-6, -25]
+      #     rotate: -90
+      # RGB13:
+      # #bottom outer
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut13
+      #     dout: rgbOut12
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: matrix_middle_top
+      #     shift: [10, -110]
+      #     rotate: 180
+      # RGB14:
+      # #bottom outer
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut14
+      #     dout: rgbOut13
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: matrix_middle_top
+      #     shift: [-15, -103]
+      #     rotate: 120
+      # RGB15:
+      # #sides
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut15
+      #     dout: rgbOut14
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: matrix_pinky_bottom
+      #     shift: [3, -29]
+      #     rotate: 120
+          
+      # RGB16:
+      # #pinkey outer
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: rgbOut16
+      #     dout: rgbOut15
+      #     VCC: LEDVCC
+      #   where:
+      #     ref: matrix_pinky_top
+      #     shift: [-13, 0]
+      #     rotate: 85
+      # RGB17top outer:
+      #   what: rgb
+      #   params:
+      #     side: F
+      #     din: LedPin #P1
+      #     dout: rgbOut16
+      #     VCC: LEDVCCIN #LEDVCCIN
+      #     designator: LED17
+      #   where:
+      #     ref: matrix_ring_top
+      #     shift: [8, TOP+9]
+
+
+
+cases:
+  middle_layer_stl:
+    - name: middle_layer
+      extrude: 3.1
+      #-- Displacement for STL exports
+      shift: [-207.5,135,0]
+
+  top_cover_stl:
+    - name: Topplate
+      extrude: 3.1
+      #-- Displacement for STL exports
+      shift: [-207.5,135,0]
